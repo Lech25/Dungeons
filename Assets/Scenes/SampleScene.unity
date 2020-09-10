@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f120a33da5644bf40bf5653894f62a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonLength: 10
+  dungeonLength: 1000
   room: {fileID: 7321184940014154075, guid: 99070280fd6a724409de1fb001878c14, type: 3}
 --- !u!4 &1068826078
 Transform:

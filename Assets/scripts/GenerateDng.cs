@@ -5,6 +5,7 @@ using UnityEngine;
 public class GenerateDng : MonoBehaviour
 {
     public Transform left, right, top, bottom;
+    public Transform[] directions;
 
     public DungeonGenerator generator;
     public Transform comingfrom;
@@ -13,34 +14,34 @@ public class GenerateDng : MonoBehaviour
     private Transform roomTransform;
 
     void Start() {
+        if (comingfrom == null) comingfrom = left;
+        directions = new Transform[] { left, right, top, bottom };
+        /*if (comingfrom == left) Destroy(left.gameObject);
+        else if (comingfrom == right) Destroy(right.gameObject);
+        else if (comingfrom == top) Destroy(top.gameObject);
+        else if (comingfrom == bottom) Destroy(bottom.gameObject);*/
         Invoke("generate", 1f);
-        
     }
 
     void generate() {
-        int i = 0;
-
         if (generator.dungeonLength > 0) {
-            while(i < 1) {
-                direction = Random.Range(1, 5);
-                switch (direction) {
-                    case 1:
-                        roomTransform = left;
-                        break;
-                    case 2:
-                        roomTransform = right;
-                        break;
-                    case 3:
-                        roomTransform = top;
-                        break;
-                    case 4:
-                        roomTransform = bottom;
-                        break;
-                    default:
-                        return;
-                }
-                if (roomTransform != null) i++;
+            while(true) {
+                direction = Random.Range(0, 4);
+                roomTransform = directions[direction];
+
+                if (roomTransform == left && comingfrom != left) break;
+                else if (roomTransform == right && comingfrom != right) break;
+                else if (roomTransform == top && comingfrom != top) break;
+                else if (roomTransform == bottom && comingfrom != bottom) break;
+                Debug.LogError("Asd");
             }
+            GenerateDng newroom = Instantiate(this, roomTransform.position, Quaternion.identity);
+            if(roomTransform == left) newroom.comingfrom = right;
+            else if(roomTransform == right) newroom.comingfrom = left;
+            else if(roomTransform == top) newroom.comingfrom = bottom;
+            else newroom.comingfrom = top;
+            //Debug.Log(newroom.comingfrom);
+
             generator.dungeonLength--;
             Destroy(left.gameObject);
             Destroy(right.gameObject);

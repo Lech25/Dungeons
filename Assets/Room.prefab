@@ -193,6 +193,7 @@ MonoBehaviour:
   right: {fileID: 46436687550716870}
   top: {fileID: 4557085992891676186}
   bottom: {fileID: 170968995703965330}
+  directions: []
   generator: {fileID: 0}
   comingfrom: {fileID: 0}
 --- !u!1 &8458713711167302481
